@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'pegaint_db'
+  database : 'pegasus_db'
 }); 
 
 connection.connect(function(err) {

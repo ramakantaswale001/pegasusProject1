@@ -13,6 +13,7 @@ import { useContext } from "react";
 
 const Sidebar = () => {
     const {dispatch} = useContext(DarkModeContext);
+    let roleaccess = localStorage.getItem("roleaccess")
     return (
         <div className="sidebar">
             <div className="top">
@@ -29,18 +30,18 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">LIST</p>
-                    <Link to="/students" style={{ textDecoration: "none" }}>
+                     <Link to="/students" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlineOutlinedIcon className="icon" />
                             <span>Students</span>
                         </li>
-                    </Link>
-                    <Link to="/trainers" style={{ textDecoration: "none" }}>
+                    </Link> 
+                   { (roleaccess== "admin") ? <Link to="/trainers" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonIcon className="icon" />
                             <span>Trainers</span>
                         </li>
-                    </Link>
+                    </Link> : "" }
                     <Link to="/courses" style={{ textDecoration: "none" }}>
                         <li>
                             <LibraryBooksOutlinedIcon className="icon" />
@@ -54,19 +55,19 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">SERVICE</p>
-                    <Link to="/setting" style={{ textDecoration: "none" }}>
+                    { (roleaccess== "admin") ? <Link to="/setting" style={{ textDecoration: "none" }}>
                         <li>
                             <SettingsOutlinedIcon className="icon" />
                             <span>Settings</span>
                         </li>
-                    </Link>
+                    </Link> : ""}
                     <p className="title">ADMIN</p>
-                    <Link to="/profile" style={{ textDecoration: "none" }}>
+                   {(roleaccess== "admin") ? <Link to="/profile" style={{ textDecoration: "none" }}>
                         <li>
                             <AccountCircleOutlinedIcon className="icon" />
                             <span>Profile</span>
                         </li>
-                    </Link>
+                    </Link> :""}
                     <Link to="/login" style={{ textDecoration: "none" }}>
                         <li>
                             <ExitToAppOutlinedIcon className="icon" />

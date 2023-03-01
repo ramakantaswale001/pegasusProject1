@@ -28,9 +28,9 @@ let getUserById = (req,res) =>{
 let userLogin = (req,res) =>{
     
   let { email, password } = req.body;
-  console.log(req.body)
+  console.log("req.body :-",req.body)
   let newPass = md5(password);
-  console.log(newPass)
+  console.log("newpass",newPass)
 
   let sql = `SELECT * FROM users WHERE email = '${email}' AND password = '${newPass}'`;
   console.log(sql)
@@ -39,7 +39,7 @@ let userLogin = (req,res) =>{
       console.log('The solution is: ', results[0]);
       
       if(results.length == 0) {
-          res.send("Username and password is not valid");
+          console.log("Username and password is not valid")
       } else {
         
           const token = jwt.sign(
