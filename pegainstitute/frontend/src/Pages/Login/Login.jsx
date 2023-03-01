@@ -3,13 +3,13 @@ import { React, useRef } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
-
+import { useState } from "react";
+import Footer from "../../Components/Footer/Footer";
 import Logo from "../../Components/Logo/Logo"
 
-
 const Login = () => {
-
+    const [uerror, setuserError] = useState({ usernameError: "" });
+    const [perror, setpassError] = useState({ passwordError: "" })
     let userEmail = useRef();
     let userPassword = useRef();
     const navigate = useNavigate();
@@ -17,47 +17,55 @@ const Login = () => {
     const onLogin = (event) => {
         event.preventDefault();
        
-        console.log(userEmail.current.value);
-        console.log(userPassword.current.value);
+        // if (event.target.username.value == "") {
+        //     setuserError({ ...uerror, usernameError: "Please enter Email" });
+        // } else {
+        //     setuserError({ ...uerror, usernameError: "" });
+        // }
 
-        // let loginApi = `http://localhost:5050/user/login`;
-    
-        // axios.post(loginApi, {
-        //   email: userEmail.current.value,
-        //   password: userPassword.current.value
-        // })
-        // .then(function (response) {
-        //   // handle success
-        //   console.log("response:-",response);
-           
-        //   if(response.data.length == 0 ) {
-        //     console.log('username and password not match');
-        //     return Swal.fire({
-        //       icon: "error",
-        //       title: "ERROR!",
-        //       text: "username and password not match",
-        //       showConfirmButton: true,
-        //     });
-        //   } else {
-        //     localStorage.setItem("token",response.data[0].token)
-        //     console.log('valid user');
-        //     console.log(response.data.length)
-        //     navigate('/dashboard');
-        //   }
-        //   let role_id=response.data[0];
-        //   console.log(response.data[0].role_id)
-        // })
-        // .catch(function (error) {
-        //   // handle error
-        //   console.log(error);
-        // });
-       
+        // if (event.target.password.value == "") {
+        //     setpassError({ ...perror, passwordError: "Please enter Password" });
+        // } else {
+        //     setpassError({ ...perror, passwordError: "" });
+        // }
+
         let loginApi = `http://localhost:5050/user/login`;
-        
-        
+    
+        axios.post(loginApi, {
+          email: userEmail.current.value,
+          password: userPassword.current.value
+        })
+        .then(function (response) {
+          // handle success
+          console.log("response:-",response);
+           
+          if(response.data.length == 0 ) {
+            console.log('username and password not match');
+            return Swal.fire({
+              icon: "error",
+              title: "ERROR!",
+              text: "username and password not match",
+              showConfirmButton: true,
+            });
+          } else {
+            localStorage.setItem("token",response.data[0].token)
+            console.log('valid user');
+            console.log(response.data.length)
+            navigate('/dashboard');
+          }
+          let role_id=response.data[0];
+          console.log(response.data[0].role_id)
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+       
+       
 
 
-      let role_id=1;
+
+      let role_id=2;
         if(role_id==1){
             localStorage.setItem("roleaccess","admin")
         } else if(role_id==2){
@@ -71,34 +79,37 @@ const Login = () => {
 
 
 
-
     }
     return (
         <div className="login">
-            <Logo/>
+            <Logo />
             <div className="loginContainer">
-               <Navbar/>
-                <div className="top">
-                    <h1>Login</h1>
+                
+                <div className="contents">
+                    <div className="top">
+                        <h1>Login</h1>
+                    </div>
+                    <div className="bottom">
+                        <form onSubmit={onLogin} >
+                            <div className="formInput">
+                                <label>Username :</label>
+                                <input type="text" ref={userEmail} name="username" placeholder="Enter Your Email" />
+                                <span className="error">{uerror.usernameError}</span>
+                            </div>
+                            <div className="formInput">
+                                <label>Password :</label>
+                                <input type="password" ref={userPassword} name="password" placeholder="Enter password" />
+                                <span className="error">{perror.passwordError}</span>
+                            </div>
+                            <div className="formInput">
+                            <input className="loginButton" type="submit" value="Login" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div className="bottom">
-                    <form onSubmit={onLogin} >
-                        <div className="formInput">
-                            <label>Username :</label>
-                            <input type="text" ref={userEmail} name="username" placeholder="Enter Your Email" />
-                           <br/><br/>
-                            <label>Password :</label>
-                            <input type="password" ref={userPassword} name="password" placeholder="Enter Your password" />
-                          
-                        </div>
-                       
-                        <div className="formInput">
-                           
-                        </div>
-                        <input className="loginButton" type="submit" value="Login" />
-                    </form>
-                </div>
+                
             </div>
+           
         </div>
     )
 }

@@ -1,4 +1,7 @@
-import "./Datatable.scss"
+import Navbar from "../../Components/Navbar/Navbar";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import "./InquiryList.scss"
+import Footer from "../../Components/Footer/Footer";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -28,10 +31,9 @@ export const rows = [
     { id: 8, lastName: 'Frances', firstName: 'Rossini', email: 'rossoni123@gmail.com', phone: '9500443328', course: 'Java', fees:'Unpaid' },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', email: 'harveyR@gmail.com', phone: '9500443328', course: 'FullStack', fees:'Paid' },
     { id: 10, lastName: 'Clifford', firstName: 'Ferrara', email: 'climfiold123@gmail.com', phone: '9500443328',  course: 'C Language', fees:'Unpaid' },
-    { id: 11, lastName: 'Frances', firstName: 'Rossini', email: 'rossoni123@gmail.com', phone: '9500443328', course: 'Java', fees:'Paid' },
-    { id: 12, lastName: 'Roxie', firstName: 'Harvey', email: 'harveyR@gmail.com', phone: '9500443328', course: 'FullStack', fees:'Paid' },
+    { id: 11, lastName: 'Frances', firstName: 'Rossini', email: 'rossoni123@gmail.com', phone: '9500443328', course: 'Java', fees:'Paid' }
 ];
-const Datatable = () => {
+const InquiryList = () => {
     const [data, setData] = useState(rows);
 
     const handleDelete = (id) => {
@@ -50,19 +52,30 @@ const Datatable = () => {
                 </div>
             )
         }
-    }]; 
-    return (
-        <div className="datatable">
-            <DataGrid
-                className="datagrid"
-                rows={data}
-                columns={columns.concat(actionColumn)}
-                pageSize={8}
-                rowsPerPageOptions={[8]}
-                checkboxSelection
-            />
+    }];
+    return(
+        <div className="list">
+            <Sidebar/>
+            <div className="listContainer">
+                <Navbar/>
+                <div className="buttonContent">
+                    <Link to="/students/new" style={{ textDecoration: "none" }}>
+                        <button>Add New Sudent</button>
+                    </Link>
+                </div>
+                <div className="datatable">
+                    <DataGrid
+                        className="datagrid"
+                        rows={data}
+                        columns={columns.concat(actionColumn)}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
+                        checkboxSelection
+                    />
+                </div>
+                <Footer/>
+            </div>
         </div>
-    );
+    )
 }
-
-export default Datatable;
+export default InquiryList;

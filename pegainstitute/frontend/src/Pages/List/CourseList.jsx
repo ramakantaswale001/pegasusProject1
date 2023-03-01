@@ -1,9 +1,9 @@
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import "./StudentList.scss"
+import "./CourseList.scss"
+import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const columns = [
@@ -23,18 +23,9 @@ const columns = [
 export const rows = [
     { id: 1, lastName: 'Snow', firstName: 'Jon', email: 'snowjohn123@gmail.com', phone: '9500443328', course: 'FullStack', fees:'Unpaid' },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', email: 'lannisterserceei123@gmail.com', phone: '9500443328', course: 'Salesforce', fees:'Paid' },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', email: 'snowjohn123@gmail.com', phone: '9500443328', course: 'C Language', fees:'Unpaid' },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', email: 'aryasatark@gmail.com', phone: '9500443328', course: 'Java', fees:'Paid' },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', email: null, phone: '9500443328', course: 'FullStack', fees:'Paid' },
-    { id: 6, lastName: 'Melisandre', firstName: null, email: 'mailsandre345@gmail.com', phone: '9500443328', course: 'Salesforce', fees:'Unpaid'},
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', email: 'climfiold123@gmail.com', phone: '9500443328',  course: 'C Language', fees:'Paid' },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', email: 'rossoni123@gmail.com', phone: '9500443328', course: 'Java', fees:'Unpaid' },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', email: 'harveyR@gmail.com', phone: '9500443328', course: 'FullStack', fees:'Paid' },
-    { id: 10, lastName: 'Clifford', firstName: 'Ferrara', email: 'climfiold123@gmail.com', phone: '9500443328',  course: 'C Language', fees:'Unpaid' },
-    { id: 11, lastName: 'Frances', firstName: 'Rossini', email: 'rossoni123@gmail.com', phone: '9500443328', course: 'Java', fees:'Paid' },
-    { id: 12, lastName: 'Roxie', firstName: 'Harvey', email: 'harveyR@gmail.com', phone: '9500443328', course: 'FullStack', fees:'Paid' },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', email: 'snowjohn123@gmail.com', phone: '9500443328', course: 'C Language', fees:'Unpaid' }
 ];
-const StudentList = () => {
+const CourseList = () => {
     const [data, setData] = useState(rows);
 
     const handleDelete = (id) => {
@@ -79,4 +70,4 @@ const StudentList = () => {
         </div>
     )
 }
-export default StudentList;
+export default CourseList;

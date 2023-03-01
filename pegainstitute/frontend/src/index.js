@@ -11,7 +11,6 @@ root.render(
     <BrowserRouter>
       <DarkModeContextProvider>
         <App />
-        
       </DarkModeContextProvider>
     </BrowserRouter>
   </React.StrictMode>

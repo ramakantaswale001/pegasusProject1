@@ -1,8 +1,49 @@
+import { Footer } from "antd/es/layout/layout";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import "./New.scss"
+import "./New.scss";
+import { useState } from "react";
+import { rows } from "../List/StudentList";
+import {nanoid} from 'nanoid';
 
 const New = (inputs, title) => {
+
+    const [data, setData] =  useState(rows);
+    const [addFormData, setAddFormData] = useState({
+        firstName:'',
+        lastName:'',
+        email:'',
+        phone:'',
+        course:'',
+        fees:''
+    });
+
+    const handleAddFormChange = (event) => {
+        event.preventDefault();
+
+        const fieldName = event.target.getAttribute('name');
+        const fieldValue = event.target.value;
+
+        const newFormData = {...addFormData};
+        newFormData[fieldName] = fieldValue;
+
+        setAddFormData(newFormData);
+    }
+
+    const handleAddFormSubmit = (event) => {
+        event.preventDefault();
+
+        const newRow = {
+            lastName: addFormData.firstName, 
+            firstName: addFormData.lastName, 
+            email: addFormData.email, 
+            phone: addFormData.phone, 
+            course: addFormData.course, 
+            fees: addFormData.fees,
+        }
+        const newRows = [...data, newRow];
+        setData(newRows);
+    }
     return(
         <div className="newStudent">
             <Sidebar/>
@@ -12,38 +53,71 @@ const New = (inputs, title) => {
                     <h1>Add Student Information</h1>
                 </div>
                 <div className="bottom">
-                    <form>
-                        <div className="formInput">
-                            <label>Id :</label>
-                            <input type="text" placeholder="Enter Id"/>
-                        </div>
+                <form onSubmit={handleAddFormSubmit}>
                         <div className="formInput">
                             <label>First Name :</label>
-                            <input type="text" placeholder="Enter First Name"/>
+                            <input 
+                                type="text" 
+                                name="firstName"
+                                placeholder="Enter First Name" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
                         <div className="formInput">
                             <label>Last Name :</label>
-                            <input type="text" placeholder="Enter Last Name"/>
+                            <input 
+                                type="text" 
+                                name="lastName" 
+                                placeholder="Enter Last Name" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
                         <div className="formInput">
                             <label>Mobile :</label>
-                            <input type="text" placeholder="Enter Mobile Number"/>
+                            <input 
+                                type="text" 
+                                name="phone" 
+                                placeholder="Enter Mobile Number" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
                         <div className="formInput">
                             <label>Email :</label>
-                            <input type="text" placeholder="Enter Email"/>
+                            <input 
+                                type="text" 
+                                name="email" 
+                                placeholder="Enter Email" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
                         <div className="formInput">
                             <label>Course Name :</label>
-                            <input type="text" placeholder="Enter Course Name"/>
+                            <input 
+                                type="text" 
+                                name="course" 
+                                placeholder="Enter Course Name" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
                         <div className="formInput">
                             <label>Fee Amount :</label>
-                            <input type="text" placeholder="Enter Fee Amount"/>
+                            <input 
+                                type="text" 
+                                name="fees" 
+                                placeholder="Enter Fee Amount" 
+                                required="required"
+                                onChange={handleAddFormChange}
+                            />
                         </div>
-                        <button>Save</button>
+                        <button type="submit">Add</button>
                     </form>
                 </div>
+                <Footer/>
             </div>
         </div>
     )

@@ -30,18 +30,18 @@ const Sidebar = () => {
                         </li>
                     </Link>
                     <p className="title">LIST</p>
-                     <Link to="/students" style={{ textDecoration: "none" }}>
+                    <Link to="/students" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonOutlineOutlinedIcon className="icon" />
                             <span>Students</span>
                         </li>
-                    </Link> 
-                   { (roleaccess== "admin") ? <Link to="/trainers" style={{ textDecoration: "none" }}>
+                    </Link>
+                    { (roleaccess== "admin") ? <Link to="/trainers" style={{ textDecoration: "none" }}>
                         <li>
                             <PersonIcon className="icon" />
                             <span>Trainers</span>
                         </li>
-                    </Link> : "" }
+                    </Link> :""}
                     <Link to="/courses" style={{ textDecoration: "none" }}>
                         <li>
                             <LibraryBooksOutlinedIcon className="icon" />
@@ -54,24 +54,17 @@ const Sidebar = () => {
                             <span>Inquiry</span>
                         </li>
                     </Link>
-                    <p className="title">SERVICE</p>
-                    { (roleaccess== "admin") ? <Link to="/setting" style={{ textDecoration: "none" }}>
-                        <li>
-                            <SettingsOutlinedIcon className="icon" />
-                            <span>Settings</span>
-                        </li>
-                    </Link> : ""}
                     <p className="title">ADMIN</p>
-                   {(roleaccess== "admin") ? <Link to="/profile" style={{ textDecoration: "none" }}>
+                    { (roleaccess== "admin") ? <Link to="/profile" style={{ textDecoration: "none" }}>
                         <li>
                             <AccountCircleOutlinedIcon className="icon" />
                             <span>Profile</span>
                         </li>
-                    </Link> :""}
+                    </Link> : ""}
                     <Link to="/login" style={{ textDecoration: "none" }}>
                         <li>
                             <ExitToAppOutlinedIcon className="icon" />
-                            <span>Login</span>
+                            <span>Logout</span>
                         </li>
                     </Link>
 
